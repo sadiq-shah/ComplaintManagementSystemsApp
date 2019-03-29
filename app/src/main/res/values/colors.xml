@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary_giki">#4384c4</color>
+    <color name="colorPrimaryDark_giki">#284f68</color>
+    <color name="colorAccent_giki">#900</color>
+    <color name="blue">#1976D2</color>
+    <color name="orange">#FFB300</color>
+    <color name="green">#76FF03</color>
 </resources>
