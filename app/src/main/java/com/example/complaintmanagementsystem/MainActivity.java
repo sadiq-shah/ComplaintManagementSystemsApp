@@ -12,5 +12,23 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Button signIn=(Button)findViewById(R.id.signIn);
+        Button createAccount=(Button)findViewById(R.id.createAccount);
+
+        signIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getBaseContext(),LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+        createAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getBaseContext(),Signup.class);
+                startActivity(intent);
+            }
+        });
     }
 }

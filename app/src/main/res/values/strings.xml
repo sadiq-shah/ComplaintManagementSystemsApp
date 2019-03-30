@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">ComplaintManagementSystem</string>
     <string name="title_activity_login">LoginActivity</string>
+    <string name="Create_Account">Create Account</string>
+    <string name="SignIn">Sign In</string>
+    <string name="Or">------------------------------------------OR------------------------------------------</string>
 </resources>
