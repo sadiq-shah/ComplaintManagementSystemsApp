@@ -19,12 +19,11 @@
             android:src="@drawable/student" />
     </LinearLayout>
 
-
-
-
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:paddingTop="10dp"
@@ -33,30 +32,12 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Name"
-            android:inputType="text"
-            android:id="@+id/name"/>
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp">
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Username"
-            android:inputType="text"
-            android:id="@+id/username"/>
+            android:hint="Registration No"
+            android:id="@+id/regNo"/>
     </android.support.design.widget.TextInputLayout>
 
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/text_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:errorEnabled="true"
@@ -65,17 +46,36 @@
         android:paddingRight="20dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp">
-    <android.support.design.widget.TextInputEditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Password"
-        android:inputType="textPassword" />
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/faculty"/>
     </android.support.design.widget.TextInputLayout>
 
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/hostelNo"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:paddingTop="10dp"
@@ -84,16 +84,31 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email"
-            android:inputType="textEmailAddress"
-            android:id="@+id/email"/>
+            android:hint="Room No"
+            android:id="@+id/roomNo"/>
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:errorEnabled="true"
+        app:passwordToggleEnabled="true"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/roomType"/>
     </android.support.design.widget.TextInputLayout>
 
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Continue"
+        android:text="Register"
         android:textColor="@color/white"
         android:background="@color/colorPrimary"
         android:layout_marginLeft="20dp"
@@ -101,6 +116,6 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:id="@+id/continueBtn"
-        android:onClick="continueRegistration"/>
+        android:onClick="studentRegistration"/>
 
 </LinearLayout>
