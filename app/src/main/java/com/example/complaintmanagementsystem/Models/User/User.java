@@ -21,6 +21,7 @@ public class User {
         //1-Check this user exists
         //2-If not, Show an error message
         //3-Login into his dashboard
+        return true;
     }
 
 
