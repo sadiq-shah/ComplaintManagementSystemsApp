@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "709343786318-v68nvi35oi88p3dai89nj40uof9c77jh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.complaintmanagementsystem",
+            "certificate_hash": "7c32ee5105aa760d48393fbb23b46470e57c16d6"
+          }
+        },
+        {
           "client_id": "709343786318-m0b9lh9fvi2hfgfi4lclpo2arlbhl9qq.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "709343786318-m0b9lh9fvi2hfgfi4lclpo2arlbhl9qq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
