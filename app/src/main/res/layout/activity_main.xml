@@ -48,6 +48,7 @@
     <Button
         android:id="@+id/signUp"
         android:text="@string/Signup"
+        android:textColor="@color/colorPrimaryDark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="156dp"
