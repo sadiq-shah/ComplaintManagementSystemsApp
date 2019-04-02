@@ -3,14 +3,12 @@ package com.example.complaintmanagementsystem.Models.User;
 public class User {
     private String name;
     private String email;
-    private String username;
     private String password;
     private int role;
 
-    public User(String name, String email, String username,String password, int role){
+    public User(String name, String email,String password, int role){
         this.name = name;
         this.email = email;
-        this.username = username;
         this.password = password;
         this.role = role;
 
