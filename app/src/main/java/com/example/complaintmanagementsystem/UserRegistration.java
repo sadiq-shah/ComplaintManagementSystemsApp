@@ -29,7 +29,7 @@ public class UserRegistration extends AppCompatActivity {
         final String name = nameEditText.getText().toString();
 
 
-        if(name == null){
+        if(name.isEmpty()){
             nameEditText.setError("Required Field.");
             return;
         }
