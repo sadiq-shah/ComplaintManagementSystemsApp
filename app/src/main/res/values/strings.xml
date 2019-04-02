@@ -39,4 +39,19 @@
         <item>Double Room</item>
     </string-array>
 
+
+    <string-array name="designationProfessor">
+        <item>Dean</item>
+        <item>Research Associate</item>
+        <item>Assistant Professor</item>
+        <item>Teaching Assistant</item>
+        <item>Lab Instructor</item>
+    </string-array>
+
+    <string-array name="department">
+        <item>Work Department</item>
+        <item>Mess Deparment</item>
+        <item>Security Department</item>
+    </string-array>
+
 </resources>

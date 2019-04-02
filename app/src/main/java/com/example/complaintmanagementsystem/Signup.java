@@ -16,6 +16,20 @@ public class Signup extends AppCompatActivity {
     public void StudentRegistration(View v)
     {
         Intent intent = new Intent(this, UserRegistration.class);
+        intent.putExtra("Role", 1);
+        startActivity(intent);
+    }
+
+    public void professorRegistration(View v)
+    {
+        Intent intent = new Intent(this, UserRegistration.class);
+        intent.putExtra("Role", 2);
+        startActivity(intent);
+    }
+
+    public void staffRegistration(View v){
+        Intent intent = new Intent(this, UserRegistration.class);
+        intent.putExtra("Role", 3);
         startActivity(intent);
     }
 }
