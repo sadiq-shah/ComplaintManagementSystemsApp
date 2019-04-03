@@ -1,6 +1,7 @@
 package com.example.complaintmanagementsystem;
 
 import android.content.Intent;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,12 +20,13 @@ public class ProfessorRegistration extends AppCompatActivity {
     private static String name;
     private static String email;
     private static String pass;
+    private TextInputLayout officeNo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_professor_registration);
 
-
+        officeNo=findViewById(R.id.officeNo);
         Spinner spinner1 = (Spinner) findViewById(R.id.designation);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,
@@ -83,17 +85,26 @@ public class ProfessorRegistration extends AppCompatActivity {
     }
 
     public void professorRegistration(View v){
-        EditText editTextOfficeNo = (EditText) findViewById(R.id.officeNo);
-        String officeNo = editTextOfficeNo.getText().toString();
 
-        Professor professor = new Professor(pass,name,email,2,faculty,designation,officeNo);
+        String oNo=officeNo.getEditText().getText().toString();
+        if(oNo.isEmpty())
+        {
+            officeNo.setError("Field cannot be empty");
+            return;
+        }
+        else
+        {
+            officeNo.setError(null);
+        }
+
+        Professor professor = new Professor(pass,name,email,2,faculty,designation,oNo);
         Log.e("pass", pass);
         Log.e("name", name);
         Log.e("email", email);
         Log.e("role", String.valueOf(2));
         Log.e("faculty", faculty);
         Log.e("designation", designation);
-        Log.e("Office No", String.valueOf(officeNo));
+        Log.e("Office No", oNo);
         return;
     }
 

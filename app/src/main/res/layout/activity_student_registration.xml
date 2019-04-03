@@ -26,13 +26,17 @@
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:paddingTop="10dp"
-        android:paddingBottom="10dp">
+        android:paddingBottom="10dp"
+        android:id="@+id/regNo"
+        app:counterMaxLength="7"
+        app:counterEnabled="true">
 
         <android.support.design.widget.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Registration No"
-            android:id="@+id/regNo"/>
+            android:hint="Registration Number"
+            android:inputType="number"
+            android:maxLength="7"/>
     </android.support.design.widget.TextInputLayout>
 
 
@@ -75,13 +79,14 @@
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:paddingTop="10dp"
-        android:paddingBottom="10dp">
+        android:paddingBottom="10dp"
+        android:id="@+id/roomNo">
 
         <android.support.design.widget.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Room No"
-            android:id="@+id/roomNo"/>
+            android:inputType="number"/>
     </android.support.design.widget.TextInputLayout>
 
 
@@ -96,7 +101,8 @@
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/roomType"/>
+            android:id="@+id/roomType"
+            />
     </android.support.design.widget.TextInputLayout>
 
 

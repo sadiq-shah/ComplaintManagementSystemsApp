@@ -1,11 +1,14 @@
 package com.example.complaintmanagementsystem;
 
 import android.content.Intent;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.example.complaintmanagementsystem.Models.User.User;
 
@@ -14,69 +17,69 @@ import java.util.regex.Pattern;
 
 public class UserRegistration extends AppCompatActivity {
     private static int role;
+    private TextInputLayout textName;
+    private TextInputLayout textEmail;
+    private TextInputLayout textPassword;
+    private ImageView imageView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_registration);
         Intent intent = getIntent();
 
+        textEmail=findViewById(R.id.email);
+        textName=findViewById(R.id.name);
+        textPassword=findViewById(R.id.text_password);
+        imageView=findViewById(R.id.signupImage);
         role = intent.getExtras().getInt("Role");
+        if(role==1)
+        {
+            imageView.setImageResource(R.drawable.student);
+        }
+        else if(role==2)
+        {
+            imageView.setImageResource(R.drawable.professor);
+        }
+        else
+        {
+            imageView.setImageResource(R.drawable.staff);
+        }
     }
 
     public void continueRegistration(View v)
     {
-        EditText nameEditText = (EditText) findViewById(R.id.name);
-        final String name = nameEditText.getText().toString();
+        String name=textName.getEditText().getText().toString();
+        String email=textEmail.getEditText().getText().toString().trim();
+        String pass=textPassword.getEditText().getText().toString();
+
+        if(isValidName(name) && isValidPassword(pass) && isValidEmail(email))
+        {
+            if(role == 1) {
+                Log.e("User", "User Registration");
+                Intent intent = new Intent(this, StudentRegistration.class);
+                intent.putExtra("name", name);
+                intent.putExtra("email", email);
+                intent.putExtra("pass", pass);
+                startActivity(intent);
+            }
+
+            if(role == 2) {
+                Log.e("Profes", "Prof Registration");
+                Intent intent = new Intent(this, ProfessorRegistration.class);
+                intent.putExtra("name", name);
+                intent.putExtra("email", email);
+                intent.putExtra("pass", pass);
+                startActivity(intent);
+            }
 
 
-        if(name.isEmpty()){
-            nameEditText.setError("Required Field.");
-            return;
-        }
-
-        EditText emailEditText = (EditText) findViewById(R.id.email);
-        final String email = emailEditText.getText().toString();
-
-        EditText passEditText = (EditText) findViewById(R.id.text_password);
-        final String pass = passEditText.getText().toString();
-        if (!isValidPassword(pass)) {
-            passEditText.setError("Password Length should be greater than 6.");
-            Log.d("Password", "Password Invalid");
-            return;
-        }
-
-        if (!isValidEmail(email)) {
-            emailEditText.setError("Invalid Email");
-            Log.d("Email", "Email Invalid");
-            return;
-        }
-
-        Log.e("Validation", "All validation checked" + role);
-        if(role == 1) {
-            Log.e("User", "User Registration");
-            Intent intent = new Intent(this, StudentRegistration.class);
-            intent.putExtra("name", name);
-            intent.putExtra("email", email);
-            intent.putExtra("pass", pass);
-            startActivity(intent);
-        }
-
-        if(role == 2) {
-            Log.e("Profes", "Prof Registration");
-            Intent intent = new Intent(this, ProfessorRegistration.class);
-            intent.putExtra("name", name);
-            intent.putExtra("email", email);
-            intent.putExtra("pass", pass);
-            startActivity(intent);
-        }
-
-
-        if(role == 3) {
-            Intent intent = new Intent(this, StaffRegistration.class);
-            intent.putExtra("name", name);
-            intent.putExtra("email", email);
-            intent.putExtra("pass", pass);
-            startActivity(intent);
+            if(role == 3) {
+                Intent intent = new Intent(this, StaffRegistration.class);
+                intent.putExtra("name", name);
+                intent.putExtra("email", email);
+                intent.putExtra("pass", pass);
+                startActivity(intent);
+            }
         }
     }
 
@@ -86,21 +89,43 @@ public class UserRegistration extends AppCompatActivity {
     //Helpers Function
     // validating email id
     private boolean isValidEmail(String email) {
-        String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-
-        Pattern pattern = Pattern.compile(EMAIL_PATTERN);
-        Matcher matcher = pattern.matcher(email);
-        return matcher.matches();
+        if(email.isEmpty()){
+            textEmail.setError("Field cannot be empty");
+            return false;
+        }else if(!Patterns.EMAIL_ADDRESS.matcher(email).matches())
+        {
+            textEmail.setError("Invalid email address");
+            return false;
+        }
+        textEmail.setError(null);
+        return true;
     }
 
     // validating password with retype password
     private boolean isValidPassword(String pass) {
-        if (pass != null && pass.length() > 6) {
+        if(pass.isEmpty()){
+            textPassword.setError("Field cannot be empty");
+            return false;
+        }
+        else if(pass.length()<6)
+        {
+            textPassword.setError("Password should be at least six characters");
+            return false;
+        }
+        else{
+            textPassword.setError(null);
             return true;
         }
-        return false;
     }
-
+    //name is not empty
+    private boolean isValidName(String name)
+    {
+        if(name.isEmpty()){
+            textName.setError("Field cannot be empty");
+            return false;
+        }
+        textName.setError(null);
+        return true;
+    }
 
 }

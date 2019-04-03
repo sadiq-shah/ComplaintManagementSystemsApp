@@ -1,6 +1,7 @@
 package com.example.complaintmanagementsystem;
 
 import android.content.Intent;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +18,7 @@ public class StaffRegistration extends AppCompatActivity {
     private static String email;
     private static String pass;
     private static String department;
+    private TextInputLayout textDesignation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +31,7 @@ public class StaffRegistration extends AppCompatActivity {
         email = intent.getExtras().getString("email");
         pass = intent.getExtras().getString("pass");
 
-
+        textDesignation=findViewById(R.id.designation);
         Spinner spinner1 = (Spinner) findViewById(R.id.department);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,
@@ -57,9 +59,16 @@ public class StaffRegistration extends AppCompatActivity {
 
     }
     public void staffRegistration(View v){
+        String designation=textDesignation.getEditText().getText().toString();
 
-        EditText designationEditText = (EditText) findViewById(R.id.designation);
-        final String designation = designationEditText.getText().toString();
+        if(designation.isEmpty())
+        {
+            textDesignation.setError("Field cannot be empty");
+            return;
+        }
+        else{
+            textDesignation.setError(null);
+        }
 
         Staff staff = new Staff(pass,name, email, 3, department,  designation);
         Log.e("Pass", pass);

@@ -55,6 +55,7 @@
         android:layout_height="wrap_content"
         android:paddingLeft="20dp"
         app:errorEnabled="true"
+        android:id="@+id/officeNo"
         android:paddingRight="20dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp">
@@ -63,7 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Office No"
-            android:id="@+id/officeNo"/>
+            />
     </android.support.design.widget.TextInputLayout>
 
 

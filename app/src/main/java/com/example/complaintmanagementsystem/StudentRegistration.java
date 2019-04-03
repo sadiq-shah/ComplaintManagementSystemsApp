@@ -1,6 +1,7 @@
 package com.example.complaintmanagementsystem;
 
 import android.content.Intent;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,11 +20,16 @@ public class StudentRegistration extends AppCompatActivity {
     private static String email;
     private static String pass;
     private static boolean isSingle=true;
+
+    private TextInputLayout textRegNo;
+    private TextInputLayout textRoomNo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_registration);
 
+        textRegNo=findViewById(R.id.regNo);
+        textRoomNo=findViewById(R.id.roomNo);
 
         Spinner spinner1 = (Spinner) findViewById(R.id.hostelNo);
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -110,12 +116,28 @@ public class StudentRegistration extends AppCompatActivity {
 
     public void registerStudent(View v)
     {
-        EditText editTextRegNo = (EditText) findViewById(R.id.regNo);
-        EditText editTextRoomNo = (EditText) findViewById(R.id.roomNo);
-        String value= editTextRegNo.getText().toString();
+
+        String value= textRegNo.getEditText().getText().toString();
+        String room = textRoomNo.getEditText().getText().toString();
+
+        if(value.isEmpty())
+        {
+            textRegNo.setError("Field cannot be empty");
+            return;
+        }
+        else{
+            textRegNo.setError(null);
+        }
+        if(room.isEmpty())
+        {
+            textRoomNo.setError("Field cannot be empty");
+            return;
+        }
+        else{
+            textRoomNo.setError(null);
+        }
         int regNo=Integer.parseInt(value);
-        String room = editTextRoomNo.getText().toString();
-        int roomNo = Integer.parseInt(room);
+        int roomNo=Integer.parseInt(room);
 
         Student student = new Student(pass,name,email,1, hostel,roomNo,faculty,regNo,isSingle);
         Log.e("pass", pass);
@@ -126,12 +148,7 @@ public class StudentRegistration extends AppCompatActivity {
         Log.e("faculty", faculty);
         Log.e("regNo", String.valueOf(regNo));
         Log.e("isSingle", String.valueOf(isSingle));
-
         return;
-
-
-
-
     }
 
 
