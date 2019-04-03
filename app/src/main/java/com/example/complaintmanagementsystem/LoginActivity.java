@@ -90,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(LoginActivity.this, "User logged in", Toast.LENGTH_SHORT).show();
                         }
                         else{
-                            Toast.makeText(LoginActivity.this, "User not logged in", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this,task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

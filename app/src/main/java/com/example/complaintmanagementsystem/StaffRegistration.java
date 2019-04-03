@@ -1,6 +1,7 @@
 package com.example.complaintmanagementsystem;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,9 +10,16 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.complaintmanagementsystem.Models.User.Staff;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class StaffRegistration extends AppCompatActivity {
     private static String name;
@@ -19,11 +27,15 @@ public class StaffRegistration extends AppCompatActivity {
     private static String pass;
     private static String department;
     private TextInputLayout textDesignation;
-
+    private FirebaseAuth mAuth;
+    private ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_staff_registration);
+
+        mAuth=FirebaseAuth.getInstance();
+        progressBar=findViewById(R.id.progressBarStaff);
 
 
         Intent intent = getIntent();
@@ -60,6 +72,7 @@ public class StaffRegistration extends AppCompatActivity {
     }
     public void staffRegistration(View v){
         String designation=textDesignation.getEditText().getText().toString();
+        progressBar.setVisibility(View.VISIBLE);
 
         if(designation.isEmpty())
         {
@@ -70,13 +83,40 @@ public class StaffRegistration extends AppCompatActivity {
             textDesignation.setError(null);
         }
 
-        Staff staff = new Staff(pass,name, email, 3, department,  designation);
+        final Staff staff = new Staff(name, email, 3, department,  designation);
         Log.e("Pass", pass);
         Log.e("name", name);
         Log.e("email", email);
         Log.e("role", String.valueOf(3));
         Log.e("department", department);
         Log.e("designation", designation);
-        return;
+        mAuth.createUserWithEmailAndPassword(email,pass)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful())
+                        {
+                            FirebaseDatabase.getInstance().getReference("Staff")
+                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .setValue(staff).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    progressBar.setVisibility(View.GONE);
+                                    if(task.isSuccessful())
+                                    {
+                                        Toast.makeText(StaffRegistration.this, "User Registered Successfully", Toast.LENGTH_SHORT).show();
+                                    }
+                                    else
+                                    {
+                                        Toast.makeText(StaffRegistration.this,task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                        }
+                        else{
+                            Toast.makeText(StaffRegistration.this,task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 }

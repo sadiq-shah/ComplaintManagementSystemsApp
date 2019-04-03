@@ -1,6 +1,7 @@
 package com.example.complaintmanagementsystem;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,9 +10,16 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.complaintmanagementsystem.Models.User.Professor;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class ProfessorRegistration extends AppCompatActivity {
     private static String designation="Dean";
@@ -21,10 +29,16 @@ public class ProfessorRegistration extends AppCompatActivity {
     private static String email;
     private static String pass;
     private TextInputLayout officeNo;
+    private FirebaseAuth mAuth;
+    private ProgressBar progressBar;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_professor_registration);
+        progressBar=findViewById(R.id.progressBarProfessor);
+        mAuth=FirebaseAuth.getInstance();
 
         officeNo=findViewById(R.id.officeNo);
         Spinner spinner1 = (Spinner) findViewById(R.id.designation);
@@ -86,6 +100,7 @@ public class ProfessorRegistration extends AppCompatActivity {
 
     public void professorRegistration(View v){
 
+        progressBar.setVisibility(View.VISIBLE);
         String oNo=officeNo.getEditText().getText().toString();
         if(oNo.isEmpty())
         {
@@ -97,7 +112,7 @@ public class ProfessorRegistration extends AppCompatActivity {
             officeNo.setError(null);
         }
 
-        Professor professor = new Professor(pass,name,email,2,faculty,designation,oNo);
+        final Professor professor = new Professor(name,email,2,faculty,designation,oNo);
         Log.e("pass", pass);
         Log.e("name", name);
         Log.e("email", email);
@@ -105,7 +120,34 @@ public class ProfessorRegistration extends AppCompatActivity {
         Log.e("faculty", faculty);
         Log.e("designation", designation);
         Log.e("Office No", oNo);
-        return;
+        mAuth.createUserWithEmailAndPassword(email,pass)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful())
+                        {
+                            FirebaseDatabase.getInstance().getReference("Professors")
+                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .setValue(professor).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    progressBar.setVisibility(View.GONE);
+                                    if(task.isSuccessful())
+                                    {
+                                        Toast.makeText(ProfessorRegistration.this, "User Registered Successfully", Toast.LENGTH_SHORT).show();
+                                    }
+                                    else
+                                    {
+                                        Toast.makeText(ProfessorRegistration.this,task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                        }
+                        else{
+                            Toast.makeText(ProfessorRegistration.this,task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 
 
