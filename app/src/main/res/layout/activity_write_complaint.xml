@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/complaint_category_bg"
+    tools:context=".ComplaintCategory">
+
+
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+
+            >
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="230dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:id="@+id/topNav">
+
+                    <ImageView
+                        android:layout_width="190dp"
+                        android:layout_height="120dp"
+                        android:src="@drawable/giki"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Complaint Management"
+                        android:textColor="@color/white"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:layout_marginTop="10dp"/>
+                </LinearLayout>
+
+                <MultiAutoCompleteTextView
+                    android:id="@+id/complaintDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:hint="Enter Complaint here"
+                    android:layout_below="@id/topNav"
+                    android:gravity="top"
+                    />
+
+                <Button
+
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/complaintDetails"
+                    android:text="Submit"
+                    android:gravity="center"
+                    android:layout_centerHorizontal="true"
+                    android:background="@color/colorPrimary"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="30dp"
+                    android:id="@+id/submit"/>
+
+            </RelativeLayout>
+        </LinearLayout>
+
+
+
+
+</RelativeLayout>
