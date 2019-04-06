@@ -3,12 +3,19 @@ package com.example.complaintmanagementsystem;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.complaintmanagementsystem.utils.Helper;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         FirebaseApp.initializeApp(getBaseContext());
         Button logIn=(Button)findViewById(R.id.logIn);
         Button signUp=(Button)findViewById(R.id.signUp);
+
 
         logIn.setOnClickListener(new View.OnClickListener() {
             @Override
