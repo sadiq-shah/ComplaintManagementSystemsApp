@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -73,6 +74,12 @@ public class Home extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        //default Fragment
+        FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.frameLayoutHome,new DashboardFragment());
+        ft.commit();
+
+        navigationView.setCheckedItem(R.id.nav_dashboard);
     }
 
     @Override
@@ -127,9 +134,17 @@ public class Home extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
-        if (id == R.id.nav_profileSettings) {
-            // Handle the camera action
+        if(id== R.id.nav_dashboard)
+        {
+            FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.frameLayoutHome,new DashboardFragment());
+            ft.commit();
+        }
+        else if (id == R.id.nav_profileSettings)
+        {
+            FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.frameLayoutHome,new ProfileSettingsFragment());
+            ft.commit();
         } else if (id == R.id.nav_logout) {
             mAuth.getInstance().signOut();
             finish();
