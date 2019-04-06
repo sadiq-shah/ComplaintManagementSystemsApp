@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.complaintmanagementsystem.Models.User.Professor;
+import com.example.complaintmanagementsystem.Models.User.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -112,7 +113,7 @@ public class ProfessorRegistration extends AppCompatActivity {
             officeNo.setError(null);
         }
 
-        final Professor professor = new Professor(name,email,2,faculty,designation,oNo);
+        final Professor professor = new Professor(faculty,designation,oNo);
         Log.e("pass", pass);
         Log.e("name", name);
         Log.e("email", email);
@@ -120,21 +121,32 @@ public class ProfessorRegistration extends AppCompatActivity {
         Log.e("faculty", faculty);
         Log.e("designation", designation);
         Log.e("Office No", oNo);
+        final User user=new User(name,email,2);
+
         mAuth.createUserWithEmailAndPassword(email,pass)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful())
                         {
-                            FirebaseDatabase.getInstance().getReference("Professors")
+                            FirebaseDatabase.getInstance().getReference("User")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                    .setValue(professor).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     progressBar.setVisibility(View.GONE);
                                     if(task.isSuccessful())
                                     {
-                                        Toast.makeText(ProfessorRegistration.this, "User Registered Successfully", Toast.LENGTH_SHORT).show();
+                                        FirebaseDatabase.getInstance().getReference("User")
+                                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).
+                                                child("role").setValue(professor).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                Toast.makeText(ProfessorRegistration.this, "User Registered Successfully", Toast.LENGTH_SHORT).show();
+                                                finish();
+                                                startActivity(new Intent(getBaseContext(),Home.class));
+                                            }
+                                        });
                                     }
                                     else
                                     {

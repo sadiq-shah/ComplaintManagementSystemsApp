@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.complaintmanagementsystem.Models.User.Student;
+import com.example.complaintmanagementsystem.Models.User.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -161,7 +162,8 @@ public class StudentRegistration extends AppCompatActivity {
         Log.e("regNo", String.valueOf(regNo));
         Log.e("isSingle", String.valueOf(isSingle));
         Log.e("Hostel No",hostel);
-        final Student student = new Student(name,email,1, hostel,roomNo,faculty,regNo,isSingle);
+        final User user=new User(name,email,1);
+        final Student student = new Student(hostel,roomNo,faculty,regNo,isSingle);
 
         mAuth.createUserWithEmailAndPassword(email,pass)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -169,15 +171,24 @@ public class StudentRegistration extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful())
                         {
-                            FirebaseDatabase.getInstance().getReference("Students")
+                            FirebaseDatabase.getInstance().getReference("User")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                    .setValue(student).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     progressBar.setVisibility(View.GONE);
                                     if(task.isSuccessful())
                                     {
-                                        Toast.makeText(StudentRegistration.this, "User Registered Successfully", Toast.LENGTH_SHORT).show();
+                                        FirebaseDatabase.getInstance().getReference("User")
+                                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).
+                                                child("role").setValue(student).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                Toast.makeText(StudentRegistration.this, "User Registered Successfully", Toast.LENGTH_SHORT).show();
+                                                finish();
+                                                startActivity(new Intent(getBaseContext(),Home.class));
+                                            }
+                                        });
                                     }
                                     else
                                     {

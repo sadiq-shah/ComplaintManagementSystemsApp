@@ -13,10 +13,16 @@ public class Signup extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
     public void StudentRegistration(View v)
     {
         Intent intent = new Intent(this, UserRegistration.class);
         intent.putExtra("Role", 1);
+        finish();
         startActivity(intent);
     }
 
@@ -24,12 +30,14 @@ public class Signup extends AppCompatActivity {
     {
         Intent intent = new Intent(this, UserRegistration.class);
         intent.putExtra("Role", 2);
+        finish();
         startActivity(intent);
     }
 
     public void staffRegistration(View v){
         Intent intent = new Intent(this, UserRegistration.class);
         intent.putExtra("Role", 3);
+        finish();
         startActivity(intent);
     }
 }

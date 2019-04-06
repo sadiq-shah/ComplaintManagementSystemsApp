@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.complaintmanagementsystem.Models.User.Staff;
+import com.example.complaintmanagementsystem.Models.User.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -83,28 +84,39 @@ public class StaffRegistration extends AppCompatActivity {
             textDesignation.setError(null);
         }
 
-        final Staff staff = new Staff(name, email, 3, department,  designation);
+        final Staff staff = new Staff( department,  designation);
         Log.e("Pass", pass);
         Log.e("name", name);
         Log.e("email", email);
         Log.e("role", String.valueOf(3));
         Log.e("department", department);
         Log.e("designation", designation);
+        final User user=new User(name,email,1);
+
         mAuth.createUserWithEmailAndPassword(email,pass)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful())
                         {
-                            FirebaseDatabase.getInstance().getReference("Staff")
+                            FirebaseDatabase.getInstance().getReference("User")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                    .setValue(staff).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     progressBar.setVisibility(View.GONE);
                                     if(task.isSuccessful())
                                     {
-                                        Toast.makeText(StaffRegistration.this, "User Registered Successfully", Toast.LENGTH_SHORT).show();
+                                        FirebaseDatabase.getInstance().getReference("User")
+                                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).
+                                                child("role").setValue(staff).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                Toast.makeText(StaffRegistration.this, "User Registered Successfully", Toast.LENGTH_SHORT).show();
+                                                finish();
+                                                startActivity(new Intent(getBaseContext(),Home.class));
+                                            }
+                                        });
                                     }
                                     else
                                     {

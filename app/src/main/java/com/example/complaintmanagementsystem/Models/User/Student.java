@@ -1,6 +1,6 @@
 package com.example.complaintmanagementsystem.Models.User;
 
-public class Student extends User {
+public class Student {
     private String hostelNo;
     private int roomNo;
     private Boolean isSingleRoom;
@@ -47,9 +47,8 @@ public class Student extends User {
         this.regno = regno;
     }
 
-    public Student(String name, String email, int role, String hostelNo, int roomNo, String faculty, int regno, Boolean isSingleRoom)
+    public Student(String hostelNo, int roomNo, String faculty, int regno, Boolean isSingleRoom)
     {
-        super(name,email,role);
         this.hostelNo = hostelNo;
         this.roomNo = roomNo;
         this.faculty = faculty;

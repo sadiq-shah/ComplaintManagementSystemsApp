@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
                 progressBar.setVisibility(View.VISIBLE);
-                registerUser();
+                loginUser();
 
             }
         });
@@ -76,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
             return true;
         }
     }
-    private void registerUser()
+    private void loginUser()
     {
         String userID=textEmailAddress.getEditText().getText().toString().trim();
         String password=textPassword.getEditText().getText().toString();
@@ -87,7 +87,9 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         progressBar.setVisibility(View.GONE);
                         if(task.isSuccessful()){
-                            Toast.makeText(LoginActivity.this, "User logged in", Toast.LENGTH_SHORT).show();
+                            finish();
+                            Intent intent=new Intent(getBaseContext(),Home.class);
+                            startActivity(intent);
                         }
                         else{
                             Toast.makeText(LoginActivity.this,task.getException().getMessage(), Toast.LENGTH_SHORT).show();
