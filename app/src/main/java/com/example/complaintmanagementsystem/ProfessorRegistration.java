@@ -121,7 +121,7 @@ public class ProfessorRegistration extends AppCompatActivity {
         Log.e("faculty", faculty);
         Log.e("designation", designation);
         Log.e("Office No", oNo);
-        final User user=new User(name,email,2);
+        final User user=new User(name,email,2,"");
 
         mAuth.createUserWithEmailAndPassword(email,pass)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -139,7 +139,7 @@ public class ProfessorRegistration extends AppCompatActivity {
                                     {
                                         FirebaseDatabase.getInstance().getReference("User")
                                                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).
-                                                child("role").setValue(professor).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                child("type").setValue(professor).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 Toast.makeText(ProfessorRegistration.this, "User Registered Successfully", Toast.LENGTH_SHORT).show();

@@ -91,7 +91,7 @@ public class StaffRegistration extends AppCompatActivity {
         Log.e("role", String.valueOf(3));
         Log.e("department", department);
         Log.e("designation", designation);
-        final User user=new User(name,email,1);
+        final User user=new User(name,email,3,"");
 
         mAuth.createUserWithEmailAndPassword(email,pass)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -109,7 +109,7 @@ public class StaffRegistration extends AppCompatActivity {
                                     {
                                         FirebaseDatabase.getInstance().getReference("User")
                                                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).
-                                                child("role").setValue(staff).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                child("type").setValue(staff).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 Toast.makeText(StaffRegistration.this, "User Registered Successfully", Toast.LENGTH_SHORT).show();

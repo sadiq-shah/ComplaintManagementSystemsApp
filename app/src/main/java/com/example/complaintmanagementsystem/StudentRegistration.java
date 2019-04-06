@@ -162,7 +162,7 @@ public class StudentRegistration extends AppCompatActivity {
         Log.e("regNo", String.valueOf(regNo));
         Log.e("isSingle", String.valueOf(isSingle));
         Log.e("Hostel No",hostel);
-        final User user=new User(name,email,1);
+        final User user=new User(name,email,1,"");
         final Student student = new Student(hostel,roomNo,faculty,regNo,isSingle);
 
         mAuth.createUserWithEmailAndPassword(email,pass)
@@ -181,7 +181,7 @@ public class StudentRegistration extends AppCompatActivity {
                                     {
                                         FirebaseDatabase.getInstance().getReference("User")
                                                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).
-                                                child("role").setValue(student).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                child("type").setValue(student).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 Toast.makeText(StudentRegistration.this, "User Registered Successfully", Toast.LENGTH_SHORT).show();

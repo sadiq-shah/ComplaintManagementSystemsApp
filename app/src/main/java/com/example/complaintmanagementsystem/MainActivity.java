@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
         logIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
                 Intent intent=new Intent(getBaseContext(),LoginActivity.class);
                 startActivity(intent);
             }
@@ -43,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
                 Intent intent=new Intent(getBaseContext(),Signup.class);
                 startActivity(intent);
             }
