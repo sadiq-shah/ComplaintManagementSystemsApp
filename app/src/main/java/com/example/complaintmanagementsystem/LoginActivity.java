@@ -95,7 +95,6 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
 
-        Intent intent = new Intent(this, ComplaintCategory.class);
-        startActivity(intent);
+
     }
 }

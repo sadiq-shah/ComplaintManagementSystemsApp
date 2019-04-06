@@ -8,8 +8,6 @@
     tools:context=".ComplaintCategory">
 
 
-
-
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -44,17 +42,40 @@
                         android:layout_marginTop="10dp"/>
                 </LinearLayout>
 
-                <MultiAutoCompleteTextView
-                    android:id="@+id/complaintDetails"
+                <TextView
+                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:hint="Enter Complaint here"
+                    android:layout_height="wrap_content"
+                    android:text="Complaint Details"
                     android:layout_below="@id/topNav"
-                    android:gravity="top"
-                    />
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+
+                <android.support.design.widget.TextInputLayout
+                    app:counterEnabled="true"
+                    app:counterMaxLength="1000"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/topNav"
+                    android:layout_marginTop="40dp"
+
+                    android:id="@+id/complaintDetails"
+                    >
+                    <EditText
+                        android:id="@+id/text"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:hint="Enter Details here"
+                        android:gravity="top"
+                        android:inputType="textMultiLine"
+                        />
+                </android.support.design.widget.TextInputLayout>
+
+
 
                 <Button
-
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/complaintDetails"
