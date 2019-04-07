@@ -7,8 +7,11 @@
     <color name="blue">#1976D2</color>
     <color name="orange">#FFB300</color>
     <color name="green">#76FF03</color>
+    <color name="darkGreen">#3B5A25</color>
     <color name="transparent">#00000000</color>
     <color name="black">#090909</color>
+    <color name="lightRed">#CF5757</color>
+    <color name="grey">#606060</color>
 
 
 
