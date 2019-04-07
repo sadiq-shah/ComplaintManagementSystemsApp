@@ -1,6 +1,8 @@
 package com.example.complaintmanagementsystem.Models.User;
 
-public class Student {
+import java.io.Serializable;
+
+public class Student implements Serializable {
     private String hostelNo;
     private int roomNo;
     private Boolean isSingleRoom;

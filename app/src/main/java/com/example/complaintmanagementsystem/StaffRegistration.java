@@ -54,6 +54,7 @@ public class StaffRegistration extends AppCompatActivity {
         // Apply the adapter to the spinner
         spinner1.setAdapter(adapter1);
 
+
         spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,
@@ -109,7 +110,7 @@ public class StaffRegistration extends AppCompatActivity {
                                     {
                                         FirebaseDatabase.getInstance().getReference("User")
                                                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).
-                                                child("type").setValue(staff).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                child("typeN").setValue(staff).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 Toast.makeText(StaffRegistration.this, "User Registered Successfully", Toast.LENGTH_SHORT).show();

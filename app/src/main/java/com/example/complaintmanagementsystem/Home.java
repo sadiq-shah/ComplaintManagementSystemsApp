@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -39,6 +40,7 @@ public class Home extends AppCompatActivity
     private View headerView;
     boolean doubleBackToExitPressedOnce = false;
     private User user;
+    private FloatingActionButton fab;
     private Student typeStudent;
     private Professor typeProfessor;
     private Staff typeStaff;
@@ -59,7 +61,7 @@ public class Home extends AppCompatActivity
         textEmailNav=headerView.findViewById(R.id.emailTextViewHome);
         loadUserInformation();
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -137,12 +139,14 @@ public class Home extends AppCompatActivity
         int id = item.getItemId();
         if(id== R.id.nav_dashboard)
         {
+            fab.show();
             FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.frameLayoutHome,new DashboardFragment());
             ft.commit();
         }
         else if (id == R.id.nav_profileSettings)
         {
+            fab.hide();
             FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
             if(user.getRole()==1)
             {
@@ -154,7 +158,8 @@ public class Home extends AppCompatActivity
             }
             else if(user.getRole()==3)
             {
-                ft.replace(R.id.frameLayoutHome,new StaffProfileSettingsFragment());
+                StaffProfileSettingsFragment staffProfileSettingsFragment=StaffProfileSettingsFragment.newInstance(user,typeStaff);
+                ft.replace(R.id.frameLayoutHome,staffProfileSettingsFragment);
             }
             ft.commit();
         } else if (id == R.id.nav_logout) {

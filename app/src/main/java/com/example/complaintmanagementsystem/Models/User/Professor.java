@@ -1,6 +1,8 @@
 package com.example.complaintmanagementsystem.Models.User;
 
-public class Professor{
+import java.io.Serializable;
+
+public class Professor implements Serializable {
     private String faculty;
     private String designation;
     private String officeNo;
