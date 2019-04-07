@@ -150,7 +150,8 @@ public class Home extends AppCompatActivity
             FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
             if(user.getRole()==1)
             {
-                ft.replace(R.id.frameLayoutHome,new StudentProfileSettingsFragment());
+                StudentProfileSettingsFragment studentProfileSettingsFragment=StudentProfileSettingsFragment.newInstance(user,typeStudent);
+                ft.replace(R.id.frameLayoutHome,studentProfileSettingsFragment);
             }
             else if(user.getRole()==2)
             {
