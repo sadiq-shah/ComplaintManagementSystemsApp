@@ -86,7 +86,8 @@ public class StaffProfileSettingsFragment extends Fragment {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatabaseReference databaseReference=firebaseDatabase.getInstance().getReference("User").child(firebaseAuth.getInstance().getCurrentUser().getUid());
+                DatabaseReference databaseReference=firebaseDatabase.getInstance().getReference("User")
+                        .child(firebaseAuth.getInstance().getCurrentUser().getUid());
                 user.setName(name.getText().toString());
                 databaseReference.setValue(user);
                 databaseReference=databaseReference.child("type");

@@ -154,7 +154,8 @@ public class Home extends AppCompatActivity
             }
             else if(user.getRole()==2)
             {
-                ft.replace(R.id.frameLayoutHome,new ProfessorProfileSettingsFragment());
+                ProfessorProfileSettingsFragment professorProfileSettingsFragment=ProfessorProfileSettingsFragment.newInstance(user,typeProfessor);
+                ft.replace(R.id.frameLayoutHome,professorProfileSettingsFragment);
             }
             else if(user.getRole()==3)
             {
