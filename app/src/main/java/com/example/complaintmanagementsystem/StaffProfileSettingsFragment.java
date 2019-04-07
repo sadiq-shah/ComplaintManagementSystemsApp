@@ -11,10 +11,10 @@ import android.view.ViewGroup;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ProfileSettingsFragment extends Fragment {
+public class StaffProfileSettingsFragment extends Fragment {
 
 
-    public ProfileSettingsFragment() {
+    public StaffProfileSettingsFragment() {
         // Required empty public constructor
     }
 
@@ -23,7 +23,7 @@ public class ProfileSettingsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile_settings, container, false);
+        return inflater.inflate(R.layout.fragment_staff_profile_settings, container, false);
     }
 
 }

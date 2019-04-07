@@ -5,9 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -20,17 +18,16 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.complaintmanagementsystem.Models.User.Professor;
+import com.example.complaintmanagementsystem.Models.User.Staff;
 import com.example.complaintmanagementsystem.Models.User.Student;
+import com.example.complaintmanagementsystem.Models.User.User;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -41,6 +38,11 @@ public class Home extends AppCompatActivity
     private NavigationView navigationView;
     private View headerView;
     boolean doubleBackToExitPressedOnce = false;
+    private User user;
+    private Student typeStudent;
+    private Professor typeProfessor;
+    private Staff typeStaff;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -142,7 +144,18 @@ public class Home extends AppCompatActivity
         else if (id == R.id.nav_profileSettings)
         {
             FragmentTransaction ft=getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.frameLayoutHome,new ProfileSettingsFragment());
+            if(user.getRole()==1)
+            {
+                ft.replace(R.id.frameLayoutHome,new StudentProfileSettingsFragment());
+            }
+            else if(user.getRole()==2)
+            {
+                ft.replace(R.id.frameLayoutHome,new ProfessorProfileSettingsFragment());
+            }
+            else if(user.getRole()==3)
+            {
+                ft.replace(R.id.frameLayoutHome,new StaffProfileSettingsFragment());
+            }
             ft.commit();
         } else if (id == R.id.nav_logout) {
             mAuth.getInstance().signOut();
@@ -163,13 +176,41 @@ public class Home extends AppCompatActivity
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String name=dataSnapshot.child(mAuth.getCurrentUser().getUid()).child("name").getValue().toString();
                 String email=dataSnapshot.child(mAuth.getCurrentUser().getUid()).child("email").getValue().toString();
-                if(name!=null && email!=null)
+                int role=Integer.parseInt(dataSnapshot.child(mAuth.getCurrentUser().getUid()).child("role").getValue().toString());
+
+                user=new User(name,email,role,"");
+                textNameNav.setText(user.getName());
+                textEmailNav.setText(user.getEmail());
+                //for student
+                if(user.getRole()==1)
                 {
-                    textNameNav.setText(name);
-                    textEmailNav.setText(email);
+                    String faculty=dataSnapshot.child(mAuth.getCurrentUser().getUid()).child("type").child("faculty").getValue().toString();
+                    String hostelNo=dataSnapshot.child(mAuth.getCurrentUser().getUid()).child("type").child("hostelNo").getValue().toString();
+                    int regno=Integer.parseInt(dataSnapshot.child(mAuth.getCurrentUser().getUid()).child("type").child("regno").getValue().toString());
+                    int roomNo=Integer.parseInt(dataSnapshot.child(mAuth.getCurrentUser().getUid()).child("type").child("roomNo").getValue().toString());
+                    String roomType=dataSnapshot.child(mAuth.getCurrentUser().getUid()).child("type").child("singleRoom").getValue().toString();
+                    boolean singleRoom=true;
+                    if(roomType!="true")
+                        singleRoom=false;
+
+                    typeStudent=new Student(hostelNo,roomNo,faculty,regno,singleRoom);
+                }
+                //for professor
+                else if(user.getRole()==2)
+                {
+                    String designation=dataSnapshot.child(mAuth.getCurrentUser().getUid()).child("type").child("designation").getValue().toString();
+                    String faculty=dataSnapshot.child(mAuth.getCurrentUser().getUid()).child("type").child("faculty").getValue().toString();
+                    String officeNo=dataSnapshot.child(mAuth.getCurrentUser().getUid()).child("type").child("officeNo").getValue().toString();
+                    typeProfessor=new Professor(faculty,designation,officeNo);
+                }
+                //for staff
+                else
+                {
+                    String department=dataSnapshot.child(mAuth.getCurrentUser().getUid()).child("type").child("department").getValue().toString();
+                    String designation=dataSnapshot.child(mAuth.getCurrentUser().getUid()).child("type").child("designation").getValue().toString();
+                    typeStaff=new Staff(department,designation);
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
