@@ -15,6 +15,7 @@ public class Complaint {
     private String details;
     private Status status;
     private boolean isOpen;
+    private String pushId;
 
 
     public Complaint(String complaintType, String details) {
@@ -39,6 +40,14 @@ public class Complaint {
     public void complaintClosed(){
         this.isOpen = false;
         return;
+    }
+
+    public String getPushId() {
+        return pushId;
+    }
+
+    public void setPushId(String pushId) {
+        this.pushId = pushId;
     }
 
     public String getComplaintType() {
