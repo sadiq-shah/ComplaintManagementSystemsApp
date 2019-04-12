@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@drawable/gikiback"
     tools:context=".MainActivity">
 
     <ImageView
@@ -20,39 +20,39 @@
 
     <Button
         android:id="@+id/logIn"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:background="@drawable/buttonshape"
+
+        android:shadowColor="#A8A8A8"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
         android:text="@string/LogIn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="24dp"
-        android:background="@color/white"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/white"
+        android:textSize="18dp"
         app:layout_constraintBottom_toTopOf="@+id/signUp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.921"
-        tools:text="@string/LogIn" />
+        app:layout_constraintVertical_bias="0.899" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginBottom="8dp"
-        android:background="@color/colorPrimaryDark"
-        app:layout_constraintBottom_toTopOf="@+id/signUp"
-        app:layout_constraintTop_toBottomOf="@+id/logIn"
-        app:layout_constraintVertical_bias="0.6"
-        tools:layout_editor_absoluteX="0dp" />
 
     <Button
         android:id="@+id/signUp"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="52dp"
+
+        android:background="@drawable/buttonshape"
+        android:shadowColor="#A8A8A8"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
         android:text="@string/Signup"
-        android:textColor="@color/colorPrimaryDark"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="156dp"
-        android:background="@color/white"
+        android:textColor="@color/white"
+        android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
