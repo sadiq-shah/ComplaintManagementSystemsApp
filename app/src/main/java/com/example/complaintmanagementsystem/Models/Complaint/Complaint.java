@@ -17,7 +17,7 @@ public class Complaint {
     private boolean isOpen;
     private String pushId;
 
-
+    public Complaint(){}
     public Complaint(String complaintType, String details) {
         this.complaintType = complaintType;
         this.date = Helper.getTodaysDate();

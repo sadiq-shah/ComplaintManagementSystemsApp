@@ -97,22 +97,34 @@ public class DashboardFragment extends Fragment {
         return v;
     }
 
+    public void startLayoutTotalComplaints(){
+        Log.d("Activity", "Total Compalints");
+        Intent intent = new Intent(getActivity().getBaseContext(), TotalComplaint.class);
+        startActivity(intent);
+    }
+
     public void startOpenComplaintsActivity(){
         Log.d("Activity", "OpenComplaintClicked");
+        Intent intent = new Intent(getActivity().getBaseContext(), OpenComplaint.class);
+        startActivity(intent);
     }
 
     public void startClosedComplaintsActivity(){
         Log.d("Activity", "Closed Complaint Clicked");
-    }
-    public void startNegativeFeedbacksActivity(){
-        Log.d("Activity", "Negative Feedback Activity");
+        Intent intent = new Intent(getActivity().getBaseContext(), ClosedComplaint.class);
+        startActivity(intent);
     }
 
-    public void startLayoutTotalComplaints(){
-        Log.d("Activity", "Total Compalints");
-    }
     public void startPositiveFeedbacksActivity(){
         Log.d("Activity", "Positive Feedback Activity");
+        Intent intent = new Intent(getActivity().getBaseContext(), PositiveFeedback.class);
+        startActivity(intent);
+    }
+
+    public void startNegativeFeedbacksActivity(){
+        Log.d("Activity", "Negative Feedback Activity");
+        Intent intent = new Intent(getActivity().getBaseContext(), NegativeFeedback.class);
+        startActivity(intent);
     }
 
 }
