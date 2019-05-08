@@ -24,6 +24,11 @@
             android:name=".Home"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".TotalComplaint"></activity>
+        <activity android:name=".PositiveFeedback" />
+        <activity android:name=".NegativeFeedback" />
+        <activity android:name=".ClosedComplaint" />
+        <activity android:name=".OpenComplaint" />
         <activity android:name=".ProfessorRegistration" />
         <activity android:name=".StaffRegistration" />
         <activity android:name=".StudentRegistration" />
