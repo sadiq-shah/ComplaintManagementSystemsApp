@@ -25,6 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 
 /**
@@ -50,6 +51,8 @@ public class DashboardFragment extends Fragment {
     int numOfComplaints = 0;
     int positiveComplaints = 0;
     int negativeComplaints= 0;
+    int openNumComplaints = 0;
+    int closedNumComplaints = 0;
 
 
 
@@ -89,6 +92,11 @@ public class DashboardFragment extends Fragment {
                 totalComplaints.setText(String.valueOf(numOfComplaints));
                 positiveFeedbacks.setText(String.valueOf(positiveComplaints));
                 negativeFeedbacks.setText(String.valueOf(negativeComplaints));
+                Random random = new Random();
+                openNumComplaints = random.nextInt(numOfComplaints + 1);
+                closedNumComplaints = numOfComplaints -  openNumComplaints;
+                openComplaints.setText(String.valueOf(openNumComplaints));
+                closedComplaints.setText(String.valueOf(closedNumComplaints));
             }
 
             @Override
@@ -103,10 +111,10 @@ public class DashboardFragment extends Fragment {
 
 
         openComplaints = (TextView) v.findViewById(R.id.openComplaints);
-        openComplaints.setText("10");
+
 
         closedComplaints = (TextView) v.findViewById(R.id.closeComplaints);
-        closedComplaints.setText("20");
+
 
         positiveFeedbacks = (TextView) v.findViewById(R.id.positiveFeebacks);
 
