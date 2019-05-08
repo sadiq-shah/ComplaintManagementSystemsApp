@@ -3,6 +3,8 @@ package com.example.complaintmanagementsystem.Models.Complaint;
 
 import com.example.complaintmanagementsystem.utils.Helper;
 
+import java.util.Random;
+
 public class Complaint {
     enum Status {
         Pending,
@@ -16,6 +18,7 @@ public class Complaint {
     private Status status;
     private boolean isOpen;
     private String pushId;
+    private int positiveFeedback;
 
     public Complaint(){}
     public Complaint(String complaintType, String details) {
@@ -24,6 +27,8 @@ public class Complaint {
         this.details = details;
         this.status = Status.Pending;
         this.isOpen = true;
+        Random random = new Random();
+        this.positiveFeedback = random.nextInt(1 - 0 + 1);
     }
 
     public void complaintReviewed()
@@ -88,5 +93,13 @@ public class Complaint {
 
     public void setOpen(boolean open) {
         isOpen = open;
+    }
+
+    public int getPositiveFeedback() {
+        return positiveFeedback;
+    }
+
+    public void setPositiveFeedback(int positiveFeedback) {
+        this.positiveFeedback = positiveFeedback;
     }
 }
